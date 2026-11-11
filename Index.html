@@ -1,1 +1,451 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WatchEarn - Watch Videos & Earn</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0d1424;
+  color: white;
+}
+
+header {
+  background: #111e35;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+  color: #20d99a;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 8px;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+.hero {
+  background: linear-gradient(120deg, #153e47, #172b50);
+  padding: 35px 20px;
+  border-radius: 15px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.hero h1 {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  color: #c5d4df;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.stat {
+  background: #18253c;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.stat h2 {
+  color: #20d99a;
+  margin-bottom: 8px;
+}
+
+.stat p {
+  color: #aab8cb;
+  font-size: 13px;
+}
+
+h2.section-title {
+  margin: 30px 0 15px;
+}
+
+.videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.video-card {
+  background: #18253c;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.video-card video {
+  width: 100%;
+  display: block;
+  background: black;
+}
+
+.video-info {
+  padding: 15px;
+}
+
+.video-info p {
+  color: #aab8cb;
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+button {
+  background: #20d99a;
+  color: #071b18;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
+}
+
+button:disabled {
+  background: #596579;
+  color: white;
+  cursor: not-allowed;
+}
+
+.wallet, .blog, .withdraw {
+  background: #18253c;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.wallet h1 {
+  color: #20d99a;
+  margin: 10px 0;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  background: #0d1424;
+  border: 1px solid #34435b;
+  border-radius: 7px;
+  color: white;
+  margin: 10px 0;
+}
+
+.notice {
+  background: #49351b;
+  color: #ffda8a;
+  padding: 13px;
+  border-radius: 8px;
+  margin: 15px 0;
+  font-size: 13px;
+}
+
+.blog p {
+  color: #b5c2d4;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+footer {
+  text-align: center;
+  color: #8290a6;
+  padding: 30px 15px;
+}
+
+@media(max-width: 500px) {
+  .hero h1 {
+    font-size: 23px;
+  }
+
+  header {
+    justify-content: center;
+  }
+
+  nav {
+    text-align: center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">WatchEarn</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#videos">Videos</a>
+    <a href="#wallet">Wallet</a>
+    <a href="#blog">Blog</a>
+  </nav>
+</header>
+
+<div class="container">
+
+<section class="hero" id="home">
+  <h1>Watch Videos. Earn Rewards.</h1>
+  <p>Complete your daily video challenges and grow your rewards.</p>
+</section>
+
+<div class="notice">
+  DEMO PLATFORM: Earnings shown here are simulated.
+  No real cash payments are made.
+</div>
+
+<section class="stats">
+  <div class="stat">
+    <h2 id="balance">$0.00</h2>
+    <p>Your Wallet Balance</p>
+  </div>
+
+  <div class="stat">
+    <h2 id="watched">0 / 3</h2>
+    <p>Videos Watched Today</p>
+  </div>
+
+  <div class="stat">
+    <h2>$0.10</h2>
+    <p>Reward Per Video</p>
+  </div>
+
+  <div class="stat">
+    <h2>$16.00</h2>
+    <p>Minimum Withdrawal</p>
+  </div>
+</section>
+
+<h2 class="section-title" id="videos">Daily Videos</h2>
+
+<div class="videos">
+
+  <div class="video-card">
+    <video controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+    <div class="video-info">
+      <h3>Video Challenge 1</h3>
+      <p>Reward: $0.10</p>
+      <button onclick="watchVideo(1)" id="btn1">Start Watching</button>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <video controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+    <div class="video-info">
+      <h3>Video Challenge 2</h3>
+      <p>Reward: $0.10</p>
+      <button onclick="watchVideo(2)" id="btn2">Start Watching</button>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <video controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+    <div class="video-info">
+      <h3>Video Challenge 3</h3>
+      <p>Reward: $0.10</p>
+      <button onclick="watchVideo(3)" id="btn3">Start Watching</button>
+    </div>
+  </div>
+
+</div>
+
+<section class="wallet" id="wallet">
+  <h2>My Wallet</h2>
+  <h1 id="walletBalance">$0.00</h1>
+  <p>Minimum withdrawal: $16.00</p>
+  <p>Total demo earnings: <span id="total">$0.00</span></p>
+</section>
+
+<section class="withdraw">
+  <h2>Request Withdrawal</h2>
+  <p style="color:#aab8cb;margin-top:10px">
+    Enter your withdrawal details below.
+  </p>
+
+  <input id="account" placeholder="Bank name">
+  <input id="accountNumber" placeholder="Account number">
+  <input id="accountName" placeholder="Account holder name">
+
+  <button onclick="withdraw()">Submit Demo Request</button>
+
+  <p id="withdrawMessage" style="margin-top:12px"></p>
+</section>
+
+<section class="blog" id="blog">
+  <h2>Latest Blog & Updates</h2>
+
+  <h3 style="margin-top:18px">Welcome to WatchEarn!</h3>
+  <p>
+    Welcome to our video rewards platform.
+    Explore daily video challenges and learn more
+    about how our reward system works.
+  </p>
+
+  <h3 style="margin-top:20px">Daily Video Rules</h3>
+  <p>
+    Members can complete up to three video challenges
+    each day. Each completed challenge has a demo
+    reward of $0.10.
+  </p>
+
+  <h3 style="margin-top:20px">Withdrawal Information</h3>
+  <p>
+    The displayed minimum withdrawal threshold is
+    $16.00. This demonstration does not process
+    payments or create real withdrawal requests.
+  </p>
+</section>
+
+</div>
+
+<footer>
+  <p>© 2026 WatchEarn. All Rights Reserved.</p>
+  <p style="margin-top:8px">Demo rewards platform.</p>
+</footer>
+
+<script>
+const REWARD = 0.10;
+const DAILY_LIMIT = 3;
+const MIN_WITHDRAWAL = 16;
+
+function today() {
+  return new Date().toLocaleDateString("en-CA");
+}
+
+let data = JSON.parse(localStorage.getItem("watchEarnData")) || {
+  balance: 0,
+  total: 0,
+  date: today(),
+  watched: []
+};
+
+function save() {
+  localStorage.setItem("watchEarnData", JSON.stringify(data));
+}
+
+function checkDay() {
+  if (data.date !== today()) {
+    data.date = today();
+    data.watched = [];
+    save();
+  }
+}
+
+function updateUI() {
+  checkDay();
+
+  document.getElementById("balance").textContent =
+    "$" + data.balance.toFixed(2);
+
+  document.getElementById("walletBalance").textContent =
+    "$" + data.balance.toFixed(2);
+
+  document.getElementById("total").textContent =
+    "$" + data.total.toFixed(2);
+
+  document.getElementById("watched").textContent =
+    data.watched.length + " / " + DAILY_LIMIT;
+
+  for (let i = 1; i <= 3; i++) {
+    let btn = document.getElementById("btn" + i);
+
+    if (data.watched.includes(i)) {
+      btn.textContent = "Completed";
+      btn.disabled = true;
+    } else if (data.watched.length >= DAILY_LIMIT) {
+      btn.textContent = "Daily Limit Reached";
+      btn.disabled = true;
+    } else {
+      btn.textContent = "Start Watching";
+      btn.disabled = false;
+    }
+  }
+}
+
+function watchVideo(id) {
+  checkDay();
+
+  if (data.watched.includes(id) ||
+      data.watched.length >= DAILY_LIMIT) {
+    return;
+  }
+
+  const btn = document.getElementById("btn" + id);
+
+  btn.disabled = true;
+  let seconds = 10;
+  btn.textContent = "Watching: " + seconds + "s";
+
+  const timer = setInterval(() => {
+    seconds--;
+    btn.textContent = "Watching: " + seconds + "s";
+
+    if (seconds <= 0) {
+      clearInterval(timer);
+
+      data.watched.push(id);
+      data.balance = Math.round((data.balance + REWARD) * 100) / 100;
+      data.total = Math.round((data.total + REWARD) * 100) / 100;
+
+      save();
+      updateUI();
+
+      alert("Demo reward earned: $0.10");
+    }
+  }, 1000);
+}
+
+function withdraw() {
+  const message = document.getElementById("withdrawMessage");
+
+  if (data.balance < MIN_WITHDRAWAL) {
+    message.textContent =
+      "You need at least $16.00 in your demo wallet.";
+    message.style.color = "#ffbd65";
+    return;
+  }
+
+  message.textContent =
+    "Demo only: No real withdrawal can be submitted.";
+  message.style.color = "#20d99a";
+}
+
+updateUI();
+</script>
+
+</body>
+  </html>
+
