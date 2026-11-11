@@ -1,284 +1,115 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WatchEarn - Watch & Earn</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A transparent video-rewards platform prototype.">
+  <title>ViewMint — Watch & Earn</title>
+  <style>
+    :root{--blue:#0875d1;--blue2:#075db0;--ink:#172033;--muted:#687386;--line:#e7edf4;--bg:#f5f8fc;--green:#16834b}
+    *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+    header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+    .nav{max-width:1050px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-size:23px;font-weight:850;letter-spacing:-1px}.brand span{color:var(--blue)}
+    .nav small{color:var(--muted)}main{max-width:1050px;margin:28px auto;padding:0 18px}
+    .hero{background:linear-gradient(125deg,#e5f3ff,#f8fbff);border:1px solid #d8eafa;border-radius:24px;padding:36px 30px;display:grid;grid-template-columns:1.3fr .7fr;gap:22px;align-items:center}
+    h1{font-size:clamp(32px,5vw,52px);line-height:1.06;margin:0 0 14px;letter-spacing:-1.8px}.hero p{font-size:18px;color:#4d5a6e;line-height:1.55;margin:0 0 22px}
+    .btn{border:0;border-radius:12px;background:var(--blue);color:white;font-size:16px;font-weight:700;padding:14px 20px;cursor:pointer}.btn:hover{background:var(--blue2)}.btn:disabled{opacity:.45;cursor:not-allowed}
+    .hero-art{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;text-align:center;font-size:58px}
+    .notice{margin:18px 0;background:#fff8e8;border:1px solid #f3d99a;color:#76530a;padding:13px 15px;border-radius:12px;font-size:14px;line-height:1.5}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+    .stat,.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 5px 20px #15243a08}
+    .stat small{color:var(--muted)}.stat strong{display:block;font-size:28px;margin-top:6px}
+    .content{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    h2{margin:0 0 15px;font-size:21px}.video-box{background:#111827;border-radius:14px;overflow:hidden;aspect-ratio:16/9;display:grid;place-items:center;color:#fff;text-align:center;padding:20px}
+    .video-box video{width:100%;height:100%;object-fit:contain}.muted{color:var(--muted);font-size:14px;line-height:1.5}
+    .row{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:13px 0}.pill{background:#edf6ff;color:#075da8;padding:6px 10px;border-radius:30px;font-size:12px;font-weight:700}
+    .progress{height:9px;background:#e9eef5;border-radius:20px;overflow:hidden;margin:12px 0}.progress div{height:100%;width:0;background:var(--blue);transition:width .3s}
+    input{width:100%;padding:13px;border:1px solid #d7e0ea;border-radius:10px;font:inherit;margin:7px 0 13px}
+    .success{color:var(--green);font-weight:650}.footer{text-align:center;color:var(--muted);font-size:13px;padding:28px 10px}
+    @media(max-width:760px){.hero,.content{grid-template-columns:1fr}.hero{padding:26px 20px}.hero-art{font-size:42px}.grid{grid-template-columns:1fr}.nav{padding:13px 16px}}
+  </style>
 </head>
-
 <body>
-
-<header class="topbar">
-  <a class="logo" href="#">Watch<span>Earn</span></a>
-  <div id="headerUser" class="header-user"></div>
-</header>
-
-<!-- AUTHENTICATION -->
-
-<main id="authSection" class="auth-container">
-
-  <div class="auth-card">
-    <div class="brand-icon">WE</div>
-
-    <h1 id="authTitle">Create Your Account</h1>
-    <p class="subtitle" id="authSubtitle">
-      Join WatchEarn and start exploring video rewards.
-    </p>
-
-    <!-- SIGN UP -->
-
-    <form id="signupForm">
-      <label>Full Name</label>
-      <input type="text" id="signupName"
-        placeholder="Enter your full name" required>
-
-      <label>Email Address</label>
-      <input type="email" id="signupEmail"
-        placeholder="Enter your email" required>
-
-      <label>Password</label>
-      <input type="password" id="signupPassword"
-        placeholder="Create a password" minlength="6" required>
-
-      <label>Confirm Password</label>
-      <input type="password" id="confirmPassword"
-        placeholder="Confirm your password" minlength="6" required>
-
-      <button type="submit">Create Account</button>
-
-      <p class="switch-text">
-        Already have an account?
-        <a href="#" id="showLogin">Login</a>
-      </p>
-    </form>
-
-    <!-- LOGIN -->
-
-    <form id="loginForm" class="hidden">
-      <label>Email Address</label>
-      <input type="email" id="loginEmail"
-        placeholder="Enter your email" required>
-
-      <label>Password</label>
-      <input type="password" id="loginPassword"
-        placeholder="Enter your password" required>
-
-      <button type="submit">Login to Account</button>
-
-      <p class="switch-text">
-        Don't have an account?
-        <a href="#" id="showSignup">Create Account</a>
-      </p>
-    </form>
-
-    <p id="authMessage" class="message"></p>
-    <p class="demo-warning">
-      Demo account system. Do not use a real or reused password.
-    </p>
-  </div>
-
-</main>
-
-<!-- DASHBOARD -->
-
-<main id="dashboard" class="container hidden">
-
-  <section class="welcome">
+<header><div class="nav"><div class="brand">View<span>Mint</span></div><small>Video rewards prototype</small></div></header>
+<main>
+  <section class="hero">
     <div>
-      <p class="welcome-small">YOUR PERSONAL DASHBOARD</p>
-      <h1>Welcome, <span id="userName">Member</span>!</h1>
-      <p>Watch videos and explore your demo rewards.</p>
+      <h1>Make your screen time count.</h1>
+      <p>Watch sponsored videos, understand each task's reward before you start, and track eligible activity in one simple dashboard.</p>
+      <button class="btn" onclick="document.getElementById('watch').scrollIntoView({behavior:'smooth'})">Explore video task</button>
     </div>
-    <div class="welcome-icon">✦</div>
+    <div class="hero-art" aria-hidden="true">▶️<div style="font-size:15px;font-weight:700;color:#526176;margin-top:8px">Watch · Track · Redeem</div></div>
   </section>
 
-  <div class="demo-notice">
-    DEMO MODE: All rewards are simulated. No real money
-    is earned or paid by this website.
-  </div>
+  <div class="notice"><b>Prototype notice:</b> This is a front-end demo only. It does not serve paid ads, create real accounts, credit withdrawable money, or send payouts. The $0.90 per-video rate and $16 minimum below are proposed settings, not a promise of payment. Only publish them as real offers after you have an advertiser agreement and funded payout system.</div>
 
-  <!-- STATS -->
-
-  <section class="stats">
-
-    <div class="stat-card">
-      <span class="stat-icon">💰</span>
-      <p>Wallet Balance</p>
-      <h2 id="balance">$0.00</h2>
-    </div>
-
-    <div class="stat-card">
-      <span class="stat-icon">🎬</span>
-      <p>Videos Today</p>
-      <h2 id="watched">0 / 3</h2>
-    </div>
-
-    <div class="stat-card">
-      <span class="stat-icon">🏆</span>
-      <p>Total Demo Rewards</p>
-      <h2 id="total">$0.00</h2>
-    </div>
-
-    <div class="stat-card">
-      <span class="stat-icon">🎁</span>
-      <p>Reward Per Video</p>
-      <h2>$0.10</h2>
-    </div>
-
+  <section class="grid" aria-label="Account summary">
+    <div class="stat"><small>Demo balance</small><strong id="balance">$0.00</strong></div>
+    <div class="stat"><small>Proposed reward per eligible video</small><strong>$0.90</strong></div>
+    <div class="stat"><small>Proposed minimum withdrawal</small><strong>$16.00</strong></div>
   </section>
 
-  <!-- NAVIGATION -->
-
-  <nav class="dashboard-nav">
-    <a href="#videoSection">Videos</a>
-    <a href="#walletSection">My Wallet</a>
-    <a href="#withdrawSection">Withdraw</a>
-    <a href="#blogSection">Blog</a>
-  </nav>
-
-  <!-- VIDEOS -->
-
-  <section id="videoSection">
-    <div class="section-heading">
-      <div>
-        <h2>Daily Video Challenges</h2>
-        <p>Complete up to three demo challenges daily.</p>
-      </div>
-      <span class="reward-tag">$0.10 / video</span>
-    </div>
-
-    <div class="video-grid">
-
-      <article class="video-card">
-        <video controls preload="none">
-          <source src="https://www.w3schools.com/html/mov_bbb.mp4"
-            type="video/mp4">
+  <section class="content">
+    <div class="panel" id="watch">
+      <div class="row"><h2>Available video task</h2><span class="pill">DEMO TASK</span></div>
+      <div class="video-box">
+        <div id="videoPlaceholder"><div style="font-size:42px">▶</div><b>Sample video preview</b><p class="muted" style="color:#cbd5e1">This is not a paid advertisement.</p></div>
+        <video id="sampleVideo" controls playsinline hidden>
+          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+          Your browser does not support video playback.
         </video>
-        <div class="video-content">
-          <h3>Video Challenge 1</h3>
-          <p>Demo video reward: $0.10</p>
-          <button class="claim-btn" id="btn1"
-            onclick="watchVideo(1)">Start Watching</button>
-        </div>
-      </article>
-
-      <article class="video-card">
-        <video controls preload="none">
-          <source src="https://www.w3schools.com/html/mov_bbb.mp4"
-            type="video/mp4">
-        </video>
-        <div class="video-content">
-          <h3>Video Challenge 2</h3>
-          <p>Demo video reward: $0.10</p>
-          <button class="claim-btn" id="btn2"
-            onclick="watchVideo(2)">Start Watching</button>
-        </div>
-      </article>
-
-      <article class="video-card">
-        <video controls preload="none">
-          <source src="https://www.w3schools.com/html/mov_bbb.mp4"
-            type="video/mp4">
-        </video>
-        <div class="video-content">
-          <h3>Video Challenge 3</h3>
-          <p>Demo video reward: $0.10</p>
-          <button class="claim-btn" id="btn3"
-            onclick="watchVideo(3)">Start Watching</button>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- WALLET -->
-
-  <section class="panel" id="walletSection">
-    <h2>My Wallet</h2>
-    <p class="muted">Your accumulated demo rewards</p>
-
-    <div class="wallet-balance">
-      <p>Available Demo Balance</p>
-      <h1 id="walletBalance">$0.00</h1>
-    </div>
-
-    <div class="wallet-details">
-      <div>
-        <p>Minimum withdrawal</p>
-        <h3>$16.00</h3>
       </div>
-      <div>
-        <p>Daily earning limit</p>
-        <h3>$0.30</h3>
+      <div class="row"><span class="muted">Task: Sample sponsored-video flow</span><b>Proposed: $0.90</b></div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <p class="muted" id="taskStatus">Press “Play demo” to preview the video-player experience.</p>
+      <div class="row">
+        <button class="btn" id="playBtn" onclick="playDemo()">Play demo</button>
+        <button class="btn" id="completeBtn" disabled onclick="completeDemo()">Finish demo</button>
       </div>
+      <p class="muted">In production, the server must verify the ad network's completion callback before crediting a reward. A browser timer alone is not proof of a valid view.</p>
     </div>
+
+    <aside class="panel">
+      <h2>Withdrawal preview</h2>
+      <p class="muted">The minimum shown here is a proposed product setting. This demo cannot submit a real withdrawal.</p>
+      <div class="row"><span class="muted">Minimum</span><b>$16.00</b></div>
+      <div class="row"><span class="muted">Demo balance</span><b id="withdrawBalance">$0.00</b></div>
+      <button class="btn" style="width:100%" disabled>Withdrawals unavailable in demo</button>
+      <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+      <h2>What a real launch needs</h2>
+      <ul class="muted" style="padding-left:19px;line-height:1.7">
+        <li>Advertiser or rewarded-ad provider approval</li>
+        <li>Backend accounts and secure authentication</li>
+        <li>Server-verified viewing events and fraud checks</li>
+        <li>Ledger, payout provider and support process</li>
+        <li>Published terms, privacy policy and eligibility rules</li>
+      </ul>
+    </aside>
   </section>
-
-  <!-- WITHDRAW -->
-
-  <section class="panel" id="withdrawSection">
-    <h2>Withdrawal Information</h2>
-    <p class="muted">
-      Enter demo details to see the withdrawal eligibility check.
-    </p>
-
-    <form id="withdrawForm">
-      <label>Bank Name</label>
-      <input id="bankName" placeholder="Enter bank name" required>
-
-      <label>Account Name</label>
-      <input id="accountName" placeholder="Account holder name" required>
-
-      <label>Account Number</label>
-      <input id="accountNumber" placeholder="Account number"
-        inputmode="numeric" required>
-
-      <button type="submit">Check Withdrawal Eligibility</button>
-    </form>
-
-    <p id="withdrawMessage" class="message"></p>
-
-    <p class="demo-warning">
-      This demo does not collect or transmit bank details and
-      cannot submit or process real withdrawals.
-    </p>
-  </section>
-
-  <!-- BLOG -->
-
-  <section class="panel" id="blogSection">
-    <h2>Latest Updates</h2>
-
-    <article class="blog-post">
-      <span>WELCOME</span>
-      <h3>Welcome to WatchEarn</h3>
-      <p>Explore our demonstration video reward platform.</p>
-    </article>
-
-    <article class="blog-post">
-      <span>VIDEO RULES</span>
-      <h3>Daily Video Challenges</h3>
-      <p>There are three demo video challenges available each day.</p>
-    </article>
-
-    <article class="blog-post">
-      <span>WALLET</span>
-      <h3>Withdrawal Information</h3>
-      <p>The demonstration minimum withdrawal threshold is $16.</p>
-    </article>
-  </section>
-
-  <button class="logout-btn" id="logoutBtn">Logout</button>
-
+  <div class="footer">© <span id="year"></span> ViewMint. Demo interface — no real earnings or payouts.</div>
 </main>
-
-<footer>
-  <p>© 2026 WatchEarn. All Rights Reserved.</p>
-  <p>Demo Rewards Platform</p>
-</footer>
-
-<script src="script.js"></script>
+<script>
+  // Front-end preview only. No balance is credited and no money can be withdrawn.
+  let demoStarted = false;
+  document.getElementById('year').textContent = new Date().getFullYear();
+  function playDemo(){
+    const v=document.getElementById('sampleVideo');
+    document.getElementById('videoPlaceholder').hidden=true;
+    v.hidden=false;
+    v.play().catch(()=>{document.getElementById('taskStatus').textContent='Tap the video play control to start the sample.';});
+    demoStarted=true;
+    document.getElementById('taskStatus').textContent='Preview playing. This sample does not generate earnings.';
+    document.getElementById('completeBtn').disabled=false;
+    document.getElementById('progressBar').style.width='35%';
+  }
+  function completeDemo(){
+    if(!demoStarted)return;
+    document.getElementById('progressBar').style.width='100%';
+    document.getElementById('taskStatus').innerHTML='<span class="success">Demo completed.</span> No money was added to your balance.';
+    document.getElementById('completeBtn').disabled=true;
+    document.getElementById('playBtn').disabled=true;
+  }
+</script>
 </body>
 </html>
